@@ -211,28 +211,37 @@
             <xrx:default>Optionally, you may add properties which indicate that the selected concept stands in a more general or more specific relationship with another concept (for example, "dog" could have the broader concept "animal"):</xrx:default>
           </xrx:i18n>
         </p>
-        <!--makes list out of all skos:Concept/@rdf:about entries, without the #-->
-        <select id="broader-select">
-          {
-          for $subject in $skoscontent//skos:Concept/@rdf:about/data()
-          let $concept := substring($subject, 2)
-          return
-          <option value="{$concept}">{$concept}</option>
-          }
-          <option selected="selected" disabled="disabled" hidden="hidden">
+        
+        <p>The current concept has the
+          
+          <select id="broader-narrower-select">
+            <option value="broader">broader</option>
+            <option value="narrower">narrower</option>
+          </select>
+          &#32;concept&#32; 
+          <!--makes list out of all skos:Concept/@rdf:about entries, without the #-->
+          <select id="broader-narrower-concept-select">
+            {
+            for $subject in $skoscontent//skos:Concept/@rdf:about/data()
+            let $concept := substring($subject, 2)
+            return
+            <option value="{$concept}">{$concept}</option>
+            }
+            <option selected="selected" disabled="disabled" hidden="hidden">
+              <xrx:i18n>
+                <xrx:key>select-concept</xrx:key>
+                <xrx:default>Select Concept</xrx:default>
+              </xrx:i18n>
+            </option>
+          </select>
+          <!--extract all broader-labels for the current concept and enter their content & remove-button into the table-->
+          <button type="submit" id="add-broader-narrower">
             <xrx:i18n>
-              <xrx:key>select-concept</xrx:key>
-              <xrx:default>Select Concept</xrx:default>
+              <xrx:key>submit</xrx:key>
+              <xrx:default>Submit</xrx:default>
             </xrx:i18n>
-          </option>
-        </select>
-        <!--extract all broader-labels for the current concept and enter their content & remove-button into the table-->
-        <button type="submit" id="add-broader">
-          <xrx:i18n>
-            <xrx:key>submit</xrx:key>
-            <xrx:default>Submit</xrx:default>
-          </xrx:i18n>
-        </button>
+          </button>
+        </p>
         <div id="existing-entries-broader">
           <p>
             <xrx:i18n>
@@ -455,15 +464,15 @@
         }}
         
         // disable submit button unless a selection has been made
-        $(':input[id="add-broader"]').prop('disabled', true);
-        $('#broader-select').change(function () {{
-            $(':input[id="add-broader"]').prop('disabled', false);
+        $(':input[id="add-broader-narrower"]').prop('disabled', true);
+        $('#broader-narrower-concept-select').change(function () {{
+            $(':input[id="add-broader-narrower"]').prop('disabled', false);
         }});
         
-        // get input for broader and hand it to add-broader service, then reload
-        $('button#add-broader').click(function () {{
-            var selectBroaderName = $('#broader-select').val();
-            var addBroaderUrl = htmlDecode("/mom/service/add-broader?concept=" + concept);
+        // get input for broader/narrower and hand it to add-broader-narrower service, then reload
+        $('button#add-broader-narrower').click(function () {{
+            var selectBroaderName = $('#broader-narrower-concept-select').val();
+            var addBroaderUrl = htmlDecode("/mom/service/add-broader-narrower?concept=" + concept);
             
             $.ajax({{
                 url: addBroaderUrl,
@@ -478,7 +487,7 @@
             }})
         }});
         
-        // delete given broader with remove-label service, reload
+        // delete given broader/narrower with remove-label service, reload
         $('input.remove-broader').click(function () {{
             var currentBroaderName = $(this).closest('td').prev().html().substring(1);
             var removeLabelUrl = htmlDecode("/mom/service/remove-label?concept=" + concept + "&amp;broader=" + currentBroaderName);
