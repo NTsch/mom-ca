@@ -201,14 +201,14 @@
       </xrx:view>
     </xrx:div>
     <xrx:div>
-      <xrx:key>broader-div</xrx:key>
+      <xrx:key>broader-narrower-div</xrx:key>
       <xrx:view>
         <hr/>
-        <h3>skos:broader</h3>
+        <h3>skos:broader &amp; skos:narrower</h3>
         <p>
           <xrx:i18n>
-            <xrx:key>skos-add-broader</xrx:key>
-            <xrx:default>Add an optional umbrella term (skos:broader) for the concept:</xrx:default>
+            <xrx:key>skos-add-broader-narrower</xrx:key>
+            <xrx:default>Optionally, you may add properties which indicate that the selected concept stands in a more general or more specific relationship with another concept (for example, "dog" could have the broader concept "animal"):</xrx:default>
           </xrx:i18n>
         </p>
         <!--makes list out of all skos:Concept/@rdf:about entries, without the #-->
@@ -563,7 +563,7 @@
           }
           <xrx:div>select-concept-div</xrx:div>
           <xrx:div>preflabel-div</xrx:div>
-          <xrx:div>broader-div</xrx:div>
+          <xrx:div>broader-narrower-div</xrx:div>
           <xrx:div>description-div</xrx:div>
         </xrx:view>
       </xrx:true>
