@@ -471,13 +471,14 @@
         
         // get input for broader/narrower and hand it to add-broader-narrower service, then reload
         $('button#add-broader-narrower').click(function () {{
-            var selectBroaderName = $('#broader-narrower-concept-select').val();
-            var addBroaderUrl = htmlDecode("/mom/service/add-broader-narrower?concept=" + concept);
+            var selectBroaderNarrowerConc = $('#broader-narrower-concept-select').val();
+            var selectBroaderNarrower = $('#broader-narrower-select').val();
+            var addBroaderNarrowerUrl = htmlDecode("/mom/service/add-broader-narrower?concept=" + concept + "&amp;bn=" + selectBroaderNarrower + "&amp;bnconc=" + selectBroaderNarrowerConc);
             
             $.ajax({{
-                url: addBroaderUrl,
+                url: addBroaderNarrowerUrl,
                 type: "POST",
-                data: selectBroaderName,
+                data: selectBroaderNarrowerConc,
                 contentType: "application/xml",
                 dataType: "text",
                 success: function (data) {{
