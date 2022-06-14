@@ -181,8 +181,18 @@
           <table id="pref-table">
             <tr>
               <th>skos:prefLabel</th>
-              <th>Sprache</th>
-              <th>Entfernen</th>
+              <th>
+                <xrx:i18n>
+                  <xrx:key>language</xrx:key>
+                  <xrx:default>Language</xrx:default>
+                </xrx:i18n>
+              </th>
+              <th>
+                <xrx:i18n>
+                  <xrx:key>delete</xrx:key>
+                  <xrx:default>Delete</xrx:default>
+                </xrx:i18n>
+              </th>
             </tr>
             <!--extract all prefLabels for the current concept and enter their content, language & remove-button into the table-->
             {
@@ -242,17 +252,22 @@
             </xrx:i18n>
           </button>
         </p>
-        <div id="existing-entries-broader">
+        <div id="existing-entries-broader-narrower">
           <p>
             <xrx:i18n>
-              <xrx:key>skos-existing-broader</xrx:key>
-              <xrx:default>The following umbrella term for this concept already exist:</xrx:default>
+              <xrx:key>skos-existing-broader-narrower</xrx:key>
+              <xrx:default>The following broader and narrower terms for this concept already exist:</xrx:default>
             </xrx:i18n>
           </p>
           <table id="broader-table">
             <tr>
               <th>skos:broader</th>
-              <th>Entfernen</th>
+              <th>
+                <xrx:i18n>
+                  <xrx:key>delete</xrx:key>
+                  <xrx:default>Delete</xrx:default>
+                </xrx:i18n>
+              </th>
             </tr>
             {
             for $broader in $skoscontent/skos:Concept[@rdf:about=$concept]//skos:broader
@@ -260,7 +275,28 @@
             <tr>
               <td>{$broader/@rdf:resource/data()}</td>
               <td>
-                <input type="submit" class="remove-broader" value="X"/>
+                <input type="submit" id= "remove-broader" class="remove-label" value="X"/>
+              </td>
+            </tr>
+            }
+          </table>
+          <table id="narrower-table">
+            <tr>
+              <th>skos:narrower</th>
+              <th>
+                <xrx:i18n>
+                  <xrx:key>delete</xrx:key>
+                  <xrx:default>Delete</xrx:default>
+                </xrx:i18n>
+              </th>
+            </tr>
+            {
+            for $narrower in $skoscontent/skos:Concept[@rdf:about=$concept]//skos:narrower
+            return
+            <tr>
+              <td>{$narrower/@rdf:resource/data()}</td>
+              <td>
+                <input type="submit" id="remove-narrower" class="remove-label" value="X"/>
               </td>
             </tr>
             }
@@ -489,9 +525,10 @@
         }});
         
         // delete given broader/narrower with remove-label service, reload
-        $('input.remove-broader').click(function () {{
-            var currentBroaderName = $(this).closest('td').prev().html().substring(1);
-            var removeLabelUrl = htmlDecode("/mom/service/remove-label?concept=" + concept + "&amp;broader=" + currentBroaderName);
+        $('input.remove-label').click(function () {{
+            let label = $(this).attr("id").split('remove-')[1];
+            var currentBroaderNarrowerName = $(this).closest('td').prev().html().substring(1);
+            var removeLabelUrl = htmlDecode("/mom/service/remove-label?concept=" + concept + "&amp;" + label + "=" + currentBroaderNarrowerName);
             
             $.ajax({{
                 url: removeLabelUrl,
