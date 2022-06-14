@@ -60,10 +60,6 @@
     </xrx:variables>
     <xrx:body>
         {
-        let $log1 := util:log('error', $narrower)
-        let $log2 := util:log('error', $broader)
-        
-        return
         if ($session-username != 'guest') then (
             if ($labellang != '') then (
                 let $update := update delete $skoscontent/skos:Concept[@rdf:about=$concept]/skos:prefLabel[@xml:lang=$labellang]

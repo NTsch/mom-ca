@@ -256,18 +256,12 @@
           <p>
             <xrx:i18n>
               <xrx:key>skos-existing-broader-narrower</xrx:key>
-              <xrx:default>The following broader and narrower terms for this concept already exist:</xrx:default>
+              <xrx:default>Existing broader and narrower terms for this concept are listed below. They can be removed by clicking on the "X" button:</xrx:default>
             </xrx:i18n>
           </p>
-          <table id="broader-table">
+          <table id="broader-table" style="border: 1px solid;">
             <tr>
               <th>skos:broader</th>
-              <th>
-                <xrx:i18n>
-                  <xrx:key>delete</xrx:key>
-                  <xrx:default>Delete</xrx:default>
-                </xrx:i18n>
-              </th>
             </tr>
             {
             for $broader in $skoscontent/skos:Concept[@rdf:about=$concept]//skos:broader
@@ -275,20 +269,15 @@
             <tr>
               <td>{$broader/@rdf:resource/data()}</td>
               <td>
-                <input type="submit" id= "remove-broader" class="remove-label" value="X"/>
+                <input type="submit" id="remove-broader" class="remove-label" value="X"/>
               </td>
             </tr>
             }
           </table>
-          <table id="narrower-table">
+          <br/>
+          <table id="narrower-table" style="border: 1px solid;">
             <tr>
               <th>skos:narrower</th>
-              <th>
-                <xrx:i18n>
-                  <xrx:key>delete</xrx:key>
-                  <xrx:default>Delete</xrx:default>
-                </xrx:i18n>
-              </th>
             </tr>
             {
             for $narrower in $skoscontent/skos:Concept[@rdf:about=$concept]//skos:narrower
@@ -494,9 +483,14 @@
         }});
         
         // don't display div with other entries if no other entries exist
-        var tbl = $('#broader-table tr');
-        if (tbl.length == 1) {{
-            $('#existing-entries-broader').hide();
+        var tblbr = $('#broader-table tr');
+        if (tblbr.length == 1) {{
+          $('#broader-table').hide();
+        }}
+        
+        var tblna = $('#narrower-table tr');
+        if (tblna.length == 1) {{
+          $('#narrower-table').hide();
         }}
         
         // disable submit button unless a selection has been made
