@@ -123,6 +123,14 @@
             <xrx:default>Submit</xrx:default>
           </xrx:i18n>
         </button>
+        <div id="concept-msg-err" style="color:red;display:none;margin:10px">
+          <b>
+            <xrx:i18n>
+              <xrx:key>error</xrx:key>
+              <xrx:default>Error</xrx:default>
+            </xrx:i18n>
+          </b>
+        </div>
         <br/>
         <p>
           <xrx:i18n>
@@ -364,6 +372,15 @@
                 success: function (data) {{
                     url = $(location).attr("href");
                     window.location.href = baseUrl + '&amp;concept=' + conceptName;
+                }},
+                error: function (data) {{
+                    $('#concept-msg-err').css({{
+                        opacity: 0, display: "inline"
+                    }}).animate({{
+                        opacity: 1
+                    }},
+                    'slow');
+                    $('#concept-msg-err').delay(5000).fadeOut('slow');
                 }}
             }})
         }});

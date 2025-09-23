@@ -48,9 +48,13 @@
     </xrx:variables>
     <xrx:body>
         {
-        if ($session-username != 'guest') then (
-            let $update := update insert <skos:Concept rdf:about="{concat('#', $data)}"><skos:definition rdf:datatype="rdf:XMLLiteral" rdf:parseType="Literal"/></skos:Concept> into $skoscontent/.
-                return $update
+        if ($user:is-loggedin) then (
+            let $about := concat('#', $data)
+            let $new-concept := <skos:Concept rdf:about="{$about}"><skos:definition rdf:datatype="rdf:XMLLiteral" rdf:parseType="Literal"/></skos:Concept>
+            return if (exists($skoscontent/skos:Concept[@rdf:about = $about])) then error(xs:QName("ALREADY_EXISTS"), "Element already exists in file") else (
+                let $update := update insert $new-concept into $skoscontent
+                return if (empty($skoscontent/skos:Concept[@rdf:about = $about])) then error(xs:QName("INSERT_FAILED"), "Element was not correctly inserted") else ()
+            )
         )
         else ()
         }
