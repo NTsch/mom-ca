@@ -1897,7 +1897,7 @@
         <xsl:for-each-group 
             select="$cei//cei:persName[not(ancestor::cei:bibl) and not(@reg)]"
             group-by="normalize-space(translate(., ',', ''))">
-            <xsl:sort select="."/>
+            <xsl:sort select="replace(normalize-unicode(., 'NFD'), '\p{Mn}+', '')"/>
             <xsl:if test="./node()">
                 <li id="{./@key}">
                     <xsl:apply-templates select="." mode="index"/>
@@ -1914,7 +1914,8 @@
         <xsl:for-each-group 
             select="$cei//cei:persName[not(ancestor::cei:bibl) and @reg]"
             group-by="@reg">
-            <xsl:sort select="@reg"/>
+            <!--sort entries alphabetically, ignoring diacritics-->
+            <xsl:sort select="replace(normalize-unicode(@reg, 'NFD'), '\p{Mn}+', '')"/>
             <xsl:if test="./node()">
                 <li about="reg" id="{./@key}">
                     <xsl:apply-templates select="." mode="index"/>
@@ -2126,7 +2127,7 @@
         <xsl:for-each-group
             select="$cei//cei:placeName"
             group-by="normalize-space(translate(., ',', ''))">
-            <xsl:sort select="."/>
+            <xsl:sort select="replace(normalize-unicode(., 'NFD'), '\p{Mn}+', '')"/>
             <xsl:if test="./node()">
                 <li>
                     <xsl:apply-templates/>
@@ -2144,7 +2145,7 @@
         <xsl:for-each-group 
             select="$cei//cei:placeName/@reg"
             group-by="normalize-space(.)">
-            <xsl:sort select="."/>
+            <xsl:sort select="replace(normalize-unicode(., 'NFD'), '\p{Mn}+', '')"/>
             <li>
                 <xsl:value-of select="."/>
             </li>
@@ -2156,7 +2157,7 @@
         <xsl:for-each-group
             select="$cei//cei:geogName"
             group-by="normalize-space(translate(., ',', ''))">
-            <xsl:sort select="."/>
+            <xsl:sort select="replace(normalize-unicode(., 'NFD'), '\p{Mn}+', '')"/>
             <xsl:if test="./node()">
                 <li>
                     <xsl:apply-templates/>
