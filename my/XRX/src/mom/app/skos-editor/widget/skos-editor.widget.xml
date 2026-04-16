@@ -374,13 +374,7 @@
                     window.location.href = baseUrl + '&amp;concept=' + conceptName;
                 }},
                 error: function (data) {{
-                    $('#concept-msg-err').css({{
-                        opacity: 0, display: "inline"
-                    }}).animate({{
-                        opacity: 1
-                    }},
-                    'slow');
-                    $('#concept-msg-err').delay(5000).fadeOut('slow');
+                    $('#concept-msg-err').css({{opacity: 0, display: "inline"}}).animate({{opacity: 1}}, 'slow').delay(5000).fadeOut('slow');
                 }}
             }})
         }});
@@ -512,22 +506,10 @@
             $.ajax({{
                 url: "/mom/service/my-collection-release-skos?vocab=" + vocab,
                 success: function (data) {{
-                    $('#release-msg-suc').css({{
-                        opacity: 0, display: "block"
-                    }}).animate({{
-                        opacity: 1
-                    }},
-                    'slow');
-                    $('#release-msg-suc').delay(5000).fadeOut('slow');
+                    $('#release-msg-suc').css({{opacity: 0, display: "block"}}).animate({{opacity: 1}},'slow').delay(5000).fadeOut('slow');
                 }},
                 error: function (data) {{
-                    $('#release-msg-err').css({{
-                        opacity: 0, display: "block"
-                    }}).animate({{
-                        opacity: 1
-                    }},
-                    'slow');
-                    $('#release-msg-err').delay(5000).fadeOut('slow');
+                    $('#release-msg-err').css({{opacity: 0, display: "block"}}).animate({{opacity: 1}},'slow').delay(5000).fadeOut('slow');
                 }}
             }})
         }});
@@ -545,12 +527,10 @@
                 dataType: "xml",
                 success: function(response) {{
                   if($(response).find("result").text()=='true'){{
-                    $('#submit-msg-suc').css({{opacity: 0, display: "inline"}}).animate({{opacity: 1}},'slow');
-                    $('#submit-msg-suc').delay(5000).fadeOut('slow');
+                    $('#submit-msg-suc').css({{opacity: 0, display: "inline"}}).animate({{opacity: 1}},'slow').delay(5000).fadeOut('slow');
                   }}
                   else{{
-                    $('#submit-msg-err').css({{opacity: 0, display: "inline"}}).animate({{opacity: 1}},'slow');
-                    $('#submit-msg-err').delay(5000).fadeOut('slow');
+                    $('#submit-msg-err').css({{opacity: 0, display: "inline"}}).animate({{opacity: 1}},'slow').delay(5000).fadeOut('slow');
                   }}
                 }}
             }})
