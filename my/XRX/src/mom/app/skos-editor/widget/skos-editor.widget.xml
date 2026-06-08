@@ -298,6 +298,14 @@
               </xrx:i18n>
             </b>
           </div>
+          <div id="submit-msg-nodiff" style="color:black;display:none;margin:10px">
+            <b>
+              <xrx:i18n>
+                <xrx:key>nodiff</xrx:key>
+                <xrx:default>No new content detected</xrx:default>
+              </xrx:i18n>
+            </b>
+          </div>
           <div id="submit-msg-err" style="color:red;display:none;margin:10px">
             <b>
               <xrx:i18n>
@@ -517,19 +525,25 @@
         
         // submits contents of the textarea to the edit-definition service, reload
         $('button#submit-content').click(function () {{
-            var editorContent = CKEDITOR.instances.editor.document.getBody().getHtml();
+            var editorContent = CKEDITOR.instances.editor.getData();
+            var definition = "<definition>" + editorContent + "</definition>";
+            console.log(definition);
             var editDefinitionUrl = htmlDecode("/mom/service/edit-definition?vocab=" + vocab + "&amp;concept=" + concept);
             
             $.ajax({{
                 url: editDefinitionUrl,
                 type: "PUT",
                 contentType: "application/xml",
-                data: editorContent,
+                data: definition,
                 dataType: "xml",
                 success: function(response) {{
                   if($(response).find("result").text()=='true'){{
                     $('#submit-msg-suc').css({{opacity: 0, display: "inline"}}).animate({{opacity: 1}},'slow');
                     $('#submit-msg-suc').delay(5000).fadeOut('slow');
+                  }}
+                  else if($(response).find("result").text()=='no diff'){{
+                    $('#submit-msg-nodiff').css({{opacity: 0, display: "inline"}}).animate({{opacity: 1}},'slow');
+                    $('#submit-msg-nodiff').delay(5000).fadeOut('slow');
                   }}
                   else{{
                     $('#submit-msg-err').css({{opacity: 0, display: "inline"}}).animate({{opacity: 1}},'slow');
