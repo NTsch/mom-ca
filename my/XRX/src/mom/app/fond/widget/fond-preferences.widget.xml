@@ -64,7 +64,7 @@ it leaves the active development stage.
 	margin:15px;
 }}
 
-#idummy-url .xfValue, #iimage-server-base-url .xfValue {{
+#idummy-url .xfValue, #iimage-server-base-url .xfValue, #iset-license .xfValue {{
 	width:500px;
 }}
 
@@ -104,6 +104,7 @@ it leaves the active development stage.
 	    <xf:bind id="bimage-access" nodeset="//xrx:param[@name='image-access']"/>
 	    <xf:bind id="bdummy-image-url" nodeset="//xrx:param[@name='dummy-image-url']"/>
 	    <xf:bind id="bimage-server-base-url" nodeset="//xrx:param[@name='image-server-base-url']"/>
+	    <xf:bind id="bset-license" nodeset="//xrx:param[@name='license']"/>
 	    
 	    <!-- actions -->
 	    <xf:action ev:event="xforms-ready">
@@ -202,28 +203,39 @@ it leaves the active development stage.
 						        </xf:action>
 						      </xf:select1>
 						    </div>
-						    <div class="doption" data-demoid="a5e11ebf-adf9-4b29-b31f-03c685512ee3">
+					    	<div class="doption" data-demoid="a5e11ebf-adf9-4b29-b31f-03c685512ee3">
 						      <xf:switch>
 							      <xf:case id="cfree">
-								      <span><xrx:i18n>
-								        <xrx:key>image-server-base-url</xrx:key>
-								        <xrx:default>Image Server (base URL)</xrx:default>
-								      </xrx:i18n>: </span>
-								      <xf:input bind="bimage-server-base-url" id="iimage-server-base-url">
-								        <xf:hint><xrx:i18n><xrx:key>eg</xrx:key><xrx:default>e.g.</xrx:default></xrx:i18n> 'http://lehre.hki.uni-koeln.de/monasterium/img/StiAA/Urkunden/'</xf:hint>
-								      </xf:input>
-								    </xf:case>
+								    <span><xrx:i18n>
+								      <xrx:key>image-server-base-url</xrx:key>
+								      <xrx:default>Image Server (base URL)</xrx:default>
+								    </xrx:i18n>: </span>
+								    <xf:input bind="bimage-server-base-url" id="iimage-server-base-url">
+								      <xf:hint><xrx:i18n><xrx:key>eg</xrx:key><xrx:default>e.g.</xrx:default></xrx:i18n> 'http://lehre.hki.uni-koeln.de/monasterium/img/StiAA/Urkunden/'</xf:hint>
+								    </xf:input>
+								  </xf:case>
 							      <xf:case id="crestricted">
-								      <span><xrx:i18n>
-								        <xrx:key>dummy-image-url</xrx:key>
-								        <xrx:default>Dummy image (URL)</xrx:default>
-								      </xrx:i18n>: </span>
-								      <xf:input bind="bdummy-image-url" id="idummy-url">
-								        <xf:hint><xrx:i18n><xrx:key>eg</xrx:key><xrx:default>e.g.</xrx:default></xrx:i18n> 'http://www.monasterium.net/Diplomatico_Viewerbild.jpg'</xf:hint>
-								      </xf:input>
-								    </xf:case>
+								    <span><xrx:i18n>
+								      <xrx:key>dummy-image-url</xrx:key>
+								      <xrx:default>Dummy image (URL)</xrx:default>
+								    </xrx:i18n>: </span>
+								    <xf:input bind="bdummy-image-url" id="idummy-url">
+								      <xf:hint><xrx:i18n><xrx:key>eg</xrx:key><xrx:default>e.g.</xrx:default></xrx:i18n> 'http://www.monasterium.net/Diplomatico_Viewerbild.jpg'</xf:hint>
+								    </xf:input>
+								  </xf:case>
 							    </xf:switch>
-					      </div>
+					      	</div>
+						  	<div class="doption" data-demoid="set-fond-license">
+						  	  <xf:switch>
+								    <span><xrx:i18n>
+								      <xrx:key>set-license</xrx:key>
+								      <xrx:default>Set license</xrx:default>
+								    </xrx:i18n>: </span>
+								    <xf:input bind="bset-license" id="iset-license">
+								      <xf:hint><xrx:i18n><xrx:key>eg</xrx:key><xrx:default>e.g.</xrx:default></xrx:i18n> 'CC BY-NC'</xf:hint>
+								    </xf:input>
+						    	</xf:switch>
+						      </div>
 					    </div>
 					  </div></div>
 					  <div data-demoid="de65c7b8-5b67-435b-b54f-cff57c2fd1c0">

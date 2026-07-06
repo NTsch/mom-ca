@@ -94,8 +94,8 @@ We expect VdU/VRET to be distributed in the future with a license more lenient t
       <xf:bind id="bcollectionid" nodeset="//cei:provenance/@pid" readonly="true()"/>,
       <xf:bind id="bimage-server-address" nodeset="//cei:image_server_address"/>,
       <xf:bind id="bimage-server-folder" nodeset="//cei:image_server_folder"/>,
-      <xf:bind id="bpreface" nodeset="//cei:div[@type='preface']" required="false()"/>
-      
+      <xf:bind id="bpreface" nodeset="//cei:div[@type='preface']" required="false()"/>,
+      <xf:bind id="bset-license" nodeset="//cei:license"/>
     </xf:model>
   }
   </xrx:model>
@@ -211,6 +211,23 @@ We expect VdU/VRET to be distributed in the future with a license more lenient t
               </xrx:i18n>
               <span> pics/BISANU</span>
             </xf:hint>      
+          </xf:input>
+          
+          <xf:input bind="bset-license">
+            <xf:label>
+              <xrx:i18n>
+                <xrx:key>set-license</xrx:key>
+                <xrx:default>Set License</xrx:default>
+              </xrx:i18n>
+              <span>: </span>
+            </xf:label>
+            <xf:hint>
+              <xrx:i18n>
+                <xrx:key>eg</xrx:key>
+                <xrx:default>e.g.</xrx:default>
+              </xrx:i18n>
+              <span> 'CC BY-NC'</span>
+            </xf:hint>
           </xf:input>
           
           <div data-demoid="9687b5ff-34a0-4307-a462-547a76eb10ae" style="text-align:right">

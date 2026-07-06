@@ -57,6 +57,7 @@ it leaves the active development stage.
 							</cei:provenance>
 							<cei:image_server_address/>
 							<cei:image_server_folder/>
+							<cei:license/>
 							<cei:user_name/>
 							<cei:password/>
 							<cei:publicationStmt>
