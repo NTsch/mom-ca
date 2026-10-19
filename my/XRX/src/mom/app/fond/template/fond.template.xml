@@ -80,6 +80,10 @@ it leaves the active development stage.
                 </ead:odd>
               </ead:c>
             </ead:dsc>
+            <ead:userestrict>
+              <ead:head/>
+              <ead:p/>
+            </ead:userestrict>
           </ead:archdesc>
         </ead:ead>
       </atom:content>

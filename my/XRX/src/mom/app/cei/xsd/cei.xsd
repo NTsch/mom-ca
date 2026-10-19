@@ -288,33 +288,7 @@
                     <xs:complexType mixed="true">
                         <xs:choice minOccurs="0" maxOccurs="unbounded">
                             <xs:element ref="p" minOccurs="0"/>
-                            <xs:element name="license" minOccurs="0">
-                                <xs:annotation>
-                                    <xs:appinfo source="EditVDU">
-                                        <xrxe:label>
-                                            <xrx:i18n>
-                                                <xrx:key>cei_license</xrx:key>
-                                                <xrx:default>license</xrx:default>
-                                            </xrx:i18n>
-                                        </xrxe:label>
-                                        <xrxe:relevant>false</xrxe:relevant>
-                                    </xs:appinfo>
-                                    <xs:documentation xml:lang="deu"> Lizenzinformationen: Das Attribut @target enthält die URI der ausgewählten Lizenz. Der Elementtext bietet ergänzende Informationen, wie die korrekte Zuschreibung und relevante Anmerkungen. </xs:documentation>
-                                    <xs:documentation xml:lang="eng"> License Information: The @target attribute includes the URI of the selected license. The text of the element provides additional information, such as the correct attribution and relevant notes. </xs:documentation>
-                                </xs:annotation>
-                                <xs:complexType>
-                                    <xs:simpleContent>
-                                        <xs:extension base="NonEmptyText">
-                                            <xs:attribute name="target" type="LicenseType" use="required">
-                                                <xs:annotation>
-                                                    <xs:documentation xml:lang="eng">The URI of the selected license.</xs:documentation>
-                                                    <xs:documentation xml:lang="deu">Die URI der ausgewählten Lizenz.</xs:documentation>
-                                                </xs:annotation>
-                                            </xs:attribute>
-                                        </xs:extension>
-                                    </xs:simpleContent>
-                                </xs:complexType>
-                            </xs:element>
+                            <xs:element ref="license" minOccurs="0"/>
                         </xs:choice>
                         <xs:attribute name="status" type="xs:anySimpleType"/>
                         <xs:attributeGroup ref="standard"/>
@@ -324,6 +298,33 @@
                 <xs:element ref="p"/>
             </xs:choice>
             <xs:attributeGroup ref="standard"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="license">
+        <xs:annotation>
+            <xs:appinfo source="EditVDU">
+                <xrxe:label>
+                    <xrx:i18n>
+                        <xrx:key>cei_license</xrx:key>
+                        <xrx:default>license</xrx:default>
+                    </xrx:i18n>
+                </xrxe:label>
+                <xrxe:relevant>false</xrxe:relevant>
+            </xs:appinfo>
+            <xs:documentation xml:lang="deu"> Lizenzinformationen: Das Attribut @target enthält die URI der ausgewählten Lizenz. Der Elementtext bietet ergänzende Informationen, wie die korrekte Zuschreibung und relevante Anmerkungen. </xs:documentation>
+            <xs:documentation xml:lang="eng"> License Information: The @target attribute includes the URI of the selected license. The text of the element provides additional information, such as the correct attribution and relevant notes. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="NonEmptyText">
+                    <xs:attribute name="target" type="LicenseType" use="required">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="eng">The URI of the selected license.</xs:documentation>
+                            <xs:documentation xml:lang="deu">Die URI der ausgewählten Lizenz.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
         </xs:complexType>
     </xs:element>
     <xs:element name="respStmt">
@@ -1142,6 +1143,7 @@
                     </xs:annotation>
                     <xs:complexType mixed="true">
                         <xs:choice minOccurs="0" maxOccurs="unbounded">
+                            <xs:element ref="license" minOccurs="0"/>
                             <xs:group ref="layout"/>
                             <xs:group ref="biblArch"/>
                         </xs:choice>
